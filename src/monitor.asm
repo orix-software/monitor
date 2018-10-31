@@ -25,6 +25,7 @@ XDECAL=$18
 XOP0=$00
 XSCRSE=$36
 XGOKBD=$52
+BUFTRV= $100
 ;TR7 = $13
 
 ; ------------------------------------------------------------------------------
@@ -2263,7 +2264,7 @@ LD0C3:  lda     _Proc1,y
         lda     FLGSCR
         ora     #$90
         sta     FLGSCR
-        lda     V2DRA
+        lda     VIA2::PRA
         and     #$07
         sta     VNMI
         lda     #<Warm_start
@@ -5055,7 +5056,7 @@ LE467:  lda     LE4EE,y
         sta     BUFTRV,y
         dey
         bpl     LE467
-        lda     V2DRA
+        lda     VIA2::PRA
         and     #$F8
         pha
         ora     RES
@@ -5134,18 +5135,18 @@ LE4DE:  dey
         beq     LE4C5
 LE4EE:  php
         sei
-        lda     V2DRA
+        lda     VIA2::PRA
         pha
         lda     RES
-        sta     V2DRA
+        sta     VIA2::PRA
         lda     (DECFIN),y
         pha
         lda     RES+1
-        sta     V2DRA
+        sta     VIA2::PRA
         pla
         sta     (DECCIB),y
         pla
-        sta     V2DRA
+        sta     VIA2::PRA
         plp
         rts
 
