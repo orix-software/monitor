@@ -1,6 +1,6 @@
 @echo off
 
-SET ORICUTRON="..\..\..\oricutron\"
+SET ORICUTRON="..\..\..\oricutron-iss\"
 
 SET RELEASE="30"
 SET UNITTEST="NO"
@@ -16,10 +16,10 @@ SET ROM=monitor
 
 IF "%1"=="NORUN" GOTO End
 
-copy %ROM%.rom %ORICUTRON%\roms\orixbank2.rom > NUL
+copy %ROM%.rom %ORICUTRON%\roms\monitor.rom > NUL
 
 cd %ORICUTRON%
-oricutronV11 -mt  --symbols "%ORIGIN_PATH%\xa_labels_orix.txt"
+oricutron -mt  --symbols "%ORIGIN_PATH%\xa_labels_orix.txt"
 
 :End
 cd %ORIGIN_PATH%

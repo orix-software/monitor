@@ -3,7 +3,6 @@
 
 .org  $c000
 
-
 ; ------------------------------------------------------------------------------
 ; Macros
 ; ------------------------------------------------------------------------------
@@ -11,22 +10,6 @@
 .macro  CALL_ORIX   value
         .byte $00,value
 .endmacro
-
-XCL0=$04
-XWSTR1=15
-XWSTR2=$16
-XOP1 = $01
-XOP2 = $02
-XWR2=$12
-XWR1=$11
-XHEXA=$2A
-XBINDX=$28
-XDECAL=$18
-XOP0=$00
-XSCRSE=$36
-XGOKBD=$52
-BUFTRV= $100
-;TR7 = $13
 
 ; ------------------------------------------------------------------------------
 ; Liste des I/O
@@ -40,46 +23,24 @@ XSC2 = $8A
 ; Fonctions Stratsed
 ; ------------------------------------------------------------------------------
 XLOAD  = $FF62
-;XDELBK = $FF4A
+
 XDELN  = $FF4D
 XBKP   = $FF59
 XINITI = $FF5C
 XDIRN  = $FF56
 XSAVE  = $FF6B
 
-
-
-
 ; ----------------------------------------------------------------------------
 
-;RES             = $0000
-;RESB            = $0002
-DECDEB          = $0004
-DECFIN          = $0006
-DECCIB          = $0008
-DECTRV          = $000A
-;TR0             = $000C
-;TR1             = $000D
-;TR2             = $000E
-;TR3             = $000F
-;TR5             = $0011
-;TR6             = $0012
-DEFAFF          = $0014
-ADSCR           = $0026
-;HRSY            = $0047
 XLPRBI          = $0048
 HRSX40          = $0049
 HRSX6           = $004A
-;HRS1            = $004D
-;HRS2            = $004F
-;HRS3            = $0051
-;HRS4            = $0053
+
 INDIC0          = $0055 ; Not found
 INDIC2          = $0057 ; not found
 SCEDEB          = $005C ; Not found
 SCEFIN          = $005E ; not found
-VARLNG          = $008C
-VARAPL          = $00D0
+
 CharGet         = $00E2
 CharGot         = $00E8
 TXTPTR          = $00E9
@@ -87,8 +48,7 @@ VARAPL2         = $00EB
 
 TABDRV          = $0208
 FLGTEL          = $020D
-;SCRX            = $0220
-;SCRY            = $0224
+
 SCRDX           = $0228
 SCRFX           = $022C
 SCRDY           = $0230
@@ -116,7 +76,6 @@ Proc2           = $04F4
 DRIVE           = $0500
 ERRNB           = $0512
 SAVES           = $0513
-;BUFNOM          = $0517
 VSALO0          = $0528
 VSALO1          = $0529
 FTYPE           = $052C
@@ -126,10 +85,9 @@ PARPIS          = $052F
 PARSEC          = $0530
 EXSALO          = $0531
 EXTDEF          = $055D
-;BUFEDT          = $0590
 
 ; ----------------------------------------------------------------------------
-        jmp     teleass_start
+        jmp     monitor_start
 
 ; ----------------------------------------------------------------------------
 ; Mnemonics
@@ -340,50 +298,10 @@ Opmode: .byte   $80,$B1,$BF,$BF,$BF,$B1,$A3,$BF
 CommandsTable:
         .byte   "QUI"
         .byte   $D4
-        ;.byte   "LOA"
-;        .byte   $C4
         .byte   "DAS"
         .byte   128+'M'
-        
-       ; .byte   "LDESA"
-       ; .byte   $D3
         .byte   "DUM"
         .byte   $D0
-        ;.byte   "LDUM"
-        ;.byte   $D0
-    ;    .byte   "LIS"
-     ;   .byte   $D4
-      ;  .byte   "LLIS"
-       ; .byte   $D4
-     ;   .byte   "RENU"
-     ;   .byte   $CD
-   ;     .byte   "L"
-    ;    .byte   128+"S"
-
-     ;   .byte   "LL"
-      ;  .byte   128+"S"
-
-;        .byte   "SAVE"
- ;       .byte   $D5
-  ;      .byte   "SAVE"
-   ;     .byte   $CF
-    ;    .byte   "SAVE"
-     ;   .byte   $CD
-      ;  .byte   "SAV"
-       ; .byte   $C5
-
-;        .byte   "ASSE"
- ;       .byte   $CD
-  ;      .byte   "LASSE"
-   ;     .byte   $CD
-;        .byte   "SYOL"
- ;       .byte   $C4
-  ;      .byte   "SYDE"
-   ;     .byte   $C6
-    ;    .byte   "SYTA"
-     ;   .byte   $C2
-      ;  .byte   "LSYTA"
-       ; .byte   $C2
         .byte   "MODI"
         .byte   $C6
         .byte   "?DE"
@@ -398,88 +316,29 @@ CommandsTable:
         .byte   $C7
         .byte   "TRAC"
         .byte   $C5
-        .byte   "MOV"
-       ; .byte   $C5
-;        .byte   "DELBA"
- ;       .byte   $CB
-;        .byte   "DELET"
- ;       .byte   $C5
-        ;.byte   "DE"
-        ;.byte   $CC
-;        .byte   "MERG"
- ;       .byte   $C5
-;        .byte   "SEE"
- ;       .byte   $CB
-        ;.byte   "CHANG"
-        ;.byte   $C5
-;        .byte   "OL"
- ;       .byte   $C4
-  ;      .byte   "NE"
-   ;     .byte   $D7
         .byte   "BAN"
         .byte   $CB
         .byte   "CAL"
         .byte   $CC
-;       .byte   "EX"
- ;       .byte   $D4
         .byte   "BYTE"
         .byte   $D3
         .byte   "MINA"
         .byte   $D3
-;        .byte   "BACKU"
- ;       .byte   $D0
-
         .byte   "HEL"
         .byte   'P'+128
-
-;        .byte   "DPAG"
- ;       .byte   $C5
-  ;      .byte   "FPAG"
-    ;    .byte   $C5
-   ;     .byte   "SLIGN"
-   ;     .byte   $C5
-    ;    .byte   "QWERT"
-     ;   .byte   $D9
-      ;  .byte   "AZERT"
-;        .byte   $D9
- ;       .byte   "FRENC"
-  ;      .byte   $C8
-   ;     .byte   "ACCSE"
-    ;    .byte   $D4
-     ;   .byte   "ACCOF"
-      ;  .byte   $C6
-
         .byte   "TEX"
         .byte   $D4
         .byte   "HIRE"
         .byte   $D3
-        .byt $00
+        .byte   $00
      
 
 ; ----------------------------------------------------------------------------
 ; Commands Addresses
 CommandsAddr:
         .word   QUIT-1
-        ;.word   LOAD-1
         .word   DESAS-1
-        ;.word   LDESAS-1
         .word   DUMP-1
-        ;.word   LDUMP-1
-;        .word   LIST-1
-;        .word   LLIST-1
-      ;  .word   RENUM-1
-        ;.word   DIR-1
-        ;.word   LDIR-1
-        ;.word   SAVEU-1
-        ;.word   SAVEO-1
-        ;.word   SAVEM-1
-        ;.word   SAVE-1
-        ;.word   ASSEM-1
-        ;.word   LASSEM-1
-        ;.word   SYOLD-1
-        ;.word   SYDEF-1
-        ;.word   SYTAB-1
-        ;.word   LSYTAB-1
         .word   MODIF-1
         .word   QDEC-1
         .word   QHEX-1
@@ -487,34 +346,16 @@ CommandsAddr:
         .word   QCAR-1
         .word   VREG-1
         .word   TRACE-1
-;        .word   MOVE-1
-       ; .word   DELBAK-1
-     ;   .word   DELETE-1
- ;       .word   DEL-1
-      ;  .word   MERGE-1
-      ;  .word   SEEK-1
-     ;   .word   CHANGE-1
-       ; .word   OLD-1
-        ;.word   NEW-1
         .word   BANK-1
         .word   CALL-1
-     ;   .word   EXT-1
         .word   BYTE-1
         .word   MINAS-1
-      ;  .word   BACKUP-1
         .word   HELP-1
         .word   DPAGE-1
         .word   FPAGE-1
         .word   SLIGNE-1
-        ;.word   QWERTY-1
-        ;.word   AZERTY-1
-        ;.word   FRENCH-1
-        ;.word   ACCSET-1
-        ;.word   ACCOFF-1
         .word   TEXT-1
         .word   HIRES-1
-        
-        
 
 ; ----------------------------------------------------------------------------
 ; Error Messages
@@ -2028,7 +1869,7 @@ LCF60:  lda     #<BUFEDT
         lda     VARAPL+17
         sta     RES+1
         tya
-        ;CALL_ORIX XINSER
+
 ; Initialise les pointeurs de la table des symboles locaux
 LocTblInit:
         lda     SCEFIN
@@ -2040,23 +1881,13 @@ LocTblInit:
         rts
 
 ; ----------------------------------------------------------------------------
-LCF80:  
-        lda     #XLPR
-        CALL_ORIX XCL0
-        lda     #XSCR
-        CALL_ORIX XOP0
-        lda     #$00
-        sta     XLPRBI
+LCF80:
+        ; printer
         rts
 
 ; ----------------------------------------------------------------------------
 LCF8D:  
-
-;        CALL_ORIX XTSTLP
- ;       lda     #XSCR
-  ;      CALL_ORIX XCL0
-   ;     lda     #XLPR
-    ;    CALL_ORIX XOP0
+        ; open printer here
         rts
 
 ; ----------------------------------------------------------------------------
@@ -2092,17 +1923,12 @@ LCFCB:  jsr     LCF80
         ldy     #$00
 LCFD2:  lda     #$6E
 
-		jsr     PrintPrompt
-		;lda #13
-		ldy #1
-		ldx #0
-        ;CALL_ORIX XEDT
-        pha
-        ;lda     RES
-        ;sta     VARAPL+16
-        ;lda     RES+1
-        ;sta     VARAPL+17
-        pla
+        jsr     PrintPrompt
+
+	ldy #1
+	ldx #0
+
+
         jsr     LC8DC
         stx     VARAPL2+8
         cpx     #$00
@@ -2176,30 +2002,13 @@ LD05D:  CALL_ORIX XWR0
         CALL_ORIX XCRLF
 QUIT: 
 ; QUIT: sortie du moniteur, retour au basic par JMP $C000
-      ;  jsr     Clear                           ; D061 20 20 D1
-;        jsr     LC88B                           ; D064 20 8B C8
- ;       ldx     #$06                            ; D067 A2 06
-  ;      lda     #$E6                            ; D069 A9 E6
-   ;     ldy     #$FF                            ; D06B A0 FF
-    ;    jmp     LD27E                           ; D06D 4C 7E D2
-      ;  jsr     Clear
         jsr     LC88B
         jmp     quit_monitor
     
-;Menu_str:
- ;       .byte   $0A,$0D
-  ;      .byte   " 1- HYPER-BASIC"
 
-   ;     .byte   $0A,$0D
-    ;    .byte   " 2- TELE-ASS"
-
-     ;   .byte   $0A,$0D
-      ;  .byte   "Votre choix:"
-
-;        .byte   $00,$00,$00,$00    
 ; ----------------------------------------------------------------------------
 ; teleass_start
-teleass_start:
+monitor_start:
         
         lda     #$07
   
@@ -2208,15 +2017,7 @@ teleass_start:
         sta     SCEDEB
 	
         sta     LPRY
-	
-;	jsr     LC8D1
- ;       cmp     #$31
-  ;      beq     LD05D
-   ;     cmp     #$32
-    ;    bne     LD076
-     ;   CALL_ORIX XWR0
-      ;  CALL_ORIX XCRLF
-        
+
         lda     #$07
 
         sta     DEFBNK
@@ -2239,12 +2040,6 @@ teleass_start:
         sta     VARAPL2+12
         lda     #$3F
         sta     VARAPL2+14
-
-        ;jsr     Clear
-		
-        ;lda     #$42
-        ;sta     LPRFY
-        ;sta     LPRSY
 
 Warm_start:
         jsr     LocTblInit
@@ -2368,22 +2163,18 @@ LD16A:  jsr     IncTXTPTR
         pla
         tay
         pla
-       ; CALL_ORIX XNOMFI
         txa
         bmi     FileNameErr
         ldy     BUFNOM
         lda     TABDRV,y
         beq     DriveErr
-        ;sty     DRIVE
         txa
         rts
 
 ; ----------------------------------------------------------------------------
 LD182:  tax
         beq     SyntaxErr1
-        ;ldx     #$00
-        ;stx     VSALO0
-        ;stx     VSALO1
+
         jsr     LD13E
         beq     SyntaxErr1
         php
@@ -2444,10 +2235,9 @@ LD1D1:  beq     LD208
         bne     LD1ED
         lda     #$40
 LD1DC:  pha
-        ;lda     VSALO0
+
         bne     LD1A9
         pla
-        ;sta     VSALO0
         jsr     CharGet
         tax
         jmp     LD1D1
@@ -2459,18 +2249,15 @@ LD1ED:  cmp     #$4E
         bne     LD1DC
 LD1F5:  cmp     #$41
         bne     SyntaxErr1
-        ;lda     VSALO1
-        ;bne     SyntaxErr1
         lda     #$80
-        ;sta     VSALO1
+
         jsr     LD273
         bne     LD1D1
 LD208:  lda     #<XLOAD
         ldy     #>XLOAD
         jsr     EXBNK0ERR
-        ;bit     FTYPE
         bpl     LD226
-        ;bit     VSALO0
+
         bvs     LD226
         lda     INPIS
         ldy     INSEC
@@ -2481,10 +2268,7 @@ LD226:  jmp     LCFCB
 
 ; ----------------------------------------------------------------------------
 LD229:  
-        ;lda     PARPIS
-        ;ldy     PARSEC
-        ;sta     SCEFIN
-        ;sty     SCEFIN+1
+
         jsr     LocTblInit
 LD236:  cpy     VARAPL2+10
         bcc     LD266
@@ -3136,21 +2920,12 @@ SAVEU:  ldx     #$C0
 SAVEO:  ldx     #$00
         .byte   $2C
 SAVEM:  
-        ;ldx     #$40
-        ;stx     VSALO0
-        ;ldx     #$80
-        ;stx     FTYPE
+
         ldx     SCEDEB
         stx     INPIS
         ldx     SCEDEB+1
         stx     INSEC
         ldx     SCEFIN
-        ;stx     PARPIS
-        ;ldx     SCEFIN+1
-        ;stx     PARSEC
-        ;ldx     #$00
-        ;stx     EXSALO
-        ;stx     EXSALO+1
         tax
         beq     LD737
         jsr     LD13E
@@ -3164,22 +2939,19 @@ SAVEM:
         jsr     LD1AC
         cmp     #$41
         bne     LD6AC
-        ;lda     #$40
-        ;sta     FTYPE
+
         jsr     LD273
         jsr     LD1AC
         cmp     #$45
         bne     LD6AC
         jsr     LD267
-        ;sta     PARPIS
-        ;sty     PARSEC
+
         txa
         beq     LD72B
         jsr     LD1AC
         cmp     #$54
         bne     LD6AC
-        ;lda     #$41
-        ;sta     FTYPE
+
         jsr     LD267
         sta     EXSALO
         sty     EXSALO+1
@@ -3216,28 +2988,9 @@ DEL:    tax
         jmp     LCFC8
 
 ; ----------------------------------------------------------------------------
-.ifdef OLD
-DELBAK: tax
-        bne     SyntaxErr4
-        lda     #<XDELBK
-        ldy     #>XDELBK
-        jsr     EXBNK0ERR
-        jmp     LCFC8
-.endif
+
 ; ----------------------------------------------------------------------------
-.ifdef OLD
-EXT:    tax
-        bne     GetEXTparam
-        lda     #$7F
-        CALL_ORIX XWR0
-        ldy     #$00
-LD76E:  lda     EXTDEF,y
-        CALL_ORIX XWR0
-        iny
-        cpy     #$03
-        bne     LD76E
-        jmp     LCFC8
-.endif
+
 ; ----------------------------------------------------------------------------
 GetEXTparam:
         cmp     #$22
@@ -3313,7 +3066,6 @@ restart_loop:
 end:
         AND #%01111111
         CALL_ORIX XWR0
-      ;  CALL_ORIX XCRLF
         inc TR7
 
 loop2:
@@ -3335,21 +3087,8 @@ next:
         inx
         bne restart_loop
 out:
-        ;ldy #>CommandsTable
-        ;CALL_ORIX XWSTR0
 
         jmp     LCFC8
-       
-        
-        
-;        tax
- ;       bne     SyntaxErr4
-  ;      sta     PARPIS
-   ;     sta     PARSEC
-    ;    lda     #<XINITI
-     ;   ldy     #>XINITI
-;        jsr     EXBNK0ERR
- ;       jmp     LCFC8
 
 ; ----------------------------------------------------------------------------
 LD7EE:  ldy     #$00
@@ -6753,7 +6492,6 @@ arrow:
 .byt %01001000
 .byt %00000000
 
-;.byt $74,$36,$39,$2c,$69,$68,$6c,$35
 quit_monitor:
         ;ef0a
         ldx #$05
@@ -6770,28 +6508,26 @@ call_routine_in_another_bank:
         JMP $040C
           
 Copyrights:
-teleass_signature:
+monitor_signature:
         .byte   "Monitor V0.1 - __DATEBUILT__",0
 
 
         .res $FFF8-*
         .org $FFF8
-
-
-			
 	
 ; ----------------------------------------------------------------------------
 ; Copyrights address
 signature_address:
-        .word   teleass_signature
+        .word   monitor_signature
 ; ----------------------------------------------------------------------------
 ; Version + ROM Type
-ROMDEF: .byte   <teleass_start,>teleass_start
+ROMDEF:
+        .word   monitor_start
 ; ----------------------------------------------------------------------------
 ; RESET
 teleass_reset:
-        .word   teleass_start
+        .word   monitor_start
 ; ----------------------------------------------------------------------------
 ; IRQ Vector
 teleass_irq_vector:
-        .word   $02FA
+        .word   IRQVECTOR
