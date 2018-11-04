@@ -1,5 +1,6 @@
-.include   "telestrat.inc"
-.include   "fcntl.inc"
+.include   "telestrat.inc"      ; From cc65
+.include   "fcntl.inc"          ; From cc65
+.include   "build.inc"          ; From Monitor Makefile
 
 .org  $c000
 
@@ -54,19 +55,15 @@ SCRFX           = $022C
 SCRDY           = $0230
 SCRFY           = $0234
 FLGSCR          = $0248
-FLGKBD          = $0275
 KBDSHT          = $0278
 LPRX            = $0286
 LPRY            = $0287
 LPRFY           = $0289
 LPRSY           = $028B
 VNMI            = $02F4
-VAPLIC          = $02FD
 
 
-EXBNK           = $040C
-VEXBNK          = $0414
-BNKCIB          = $0417
+
 DEFBNK          = $04E0
 Proc1           = $04E2
 Ptr1            = $04EE
@@ -6509,7 +6506,7 @@ call_routine_in_another_bank:
           
 Copyrights:
 monitor_signature:
-        .byte   "Monitor V0.1 - __DATEBUILT__",0
+        .byte   "Monitor V0.1 - ",__DATE__,0
 
 
         .res $FFF8-*

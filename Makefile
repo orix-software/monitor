@@ -18,6 +18,7 @@ TELESTRAT_TARGET_RELEASE=release/telestrat
 MYDATE = $(shell date +"%Y-%m-%d %H:%m")
  
 build: $(SOURCE)
+	@date +'.define __DATE__ "%F %R"' > src/build.inc
 	$(AS) $(CFLAGS) $(SOURCE) -o $(ROM).ld65
 	$(LD) -tnone $(ROM).ld65 -o $(ROM).rom
 
