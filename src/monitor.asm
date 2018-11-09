@@ -20,22 +20,7 @@ XSC1 = $89
 XSC2 = $8A
 
 
-; ------------------------------------------------------------------------------
-; Fonctions Stratsed
-; ------------------------------------------------------------------------------
-XLOAD  = $FF62
 
-XDELN  = $FF4D
-XBKP   = $FF59
-XINITI = $FF5C
-XDIRN  = $FF56
-XSAVE  = $FF6B
-
-; ----------------------------------------------------------------------------
-
-XLPRBI          = $0048
-HRSX40          = $0049
-HRSX6           = $004A
 
 INDIC0          = $0055 ; Not found
 INDIC2          = $0057 ; not found
@@ -47,20 +32,16 @@ CharGot         = $00E8
 TXTPTR          = $00E9
 VARAPL2         = $00EB
 
-TABDRV          = $0208
-FLGTEL          = $020D
+
 
 SCRDX           = $0228
 SCRFX           = $022C
 SCRDY           = $0230
 SCRFY           = $0234
 FLGSCR          = $0248
-KBDSHT          = $0278
 LPRX            = $0286
 LPRY            = $0287
-LPRFY           = $0289
 LPRSY           = $028B
-VNMI            = $02F4
 
 
 
@@ -70,18 +51,17 @@ Ptr1            = $04EE
 Ptr2            = $04F0
 Flags           = $04F2
 Proc2           = $04F4
-DRIVE           = $0500
-ERRNB           = $0512
-SAVES           = $0513
-VSALO0          = $0528
-VSALO1          = $0529
-FTYPE           = $052C
+
+
+
+
+
 INPIS           = $052D
 INSEC           = $052E
 PARPIS          = $052F
 PARSEC          = $0530
-EXSALO          = $0531
-EXTDEF          = $055D
+
+
 
 ; ----------------------------------------------------------------------------
         jmp     monitor_start
@@ -6507,7 +6487,6 @@ call_routine_in_another_bank:
 Copyrights:
 monitor_signature:
         .byte   "Monitor V0.1 - ",__DATE__,0
-
 
         .res $FFF8-*
         .org $FFF8
