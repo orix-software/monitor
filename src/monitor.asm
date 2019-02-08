@@ -34,14 +34,14 @@ VARAPL2         = $00EB
 
 
 
-SCRDX           = $0228
-SCRFX           = $022C
-SCRDY           = $0230
-SCRFY           = $0234
-FLGSCR          = $0248
-LPRX            = $0286
-LPRY            = $0287
-LPRSY           = $028B
+;SCRDX           = $0228
+;SCRFX           = $022C
+;SCRDY           = $0230
+;SCRFY           = $0234
+;FLGSCR          = $0248
+;LPRX            = $0286
+;LPRY            = $0287
+;LPRSY           = $028B
 
 
 
