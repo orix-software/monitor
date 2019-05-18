@@ -6483,13 +6483,33 @@ call_routine_in_another_bank:
         STY VEXBNK+2 ; BNK_ADDRESS_TO_JUMP_HIGH
         STX BNKCIB
         JMP $040C
-          
+
+
+
 Copyrights:
 monitor_signature:
-        .byte   "Monitor V0.1 - ",__DATE__,0
+       .byte   "Monitor V0.1 - ",__DATE__,0
 
-        .res $FFF8-*
-        .org $FFF8
+       .res $FFF1-*
+       .org $FFF1
+; $fff1
+parse_vector:
+        .byte $00
+        .byte $00
+; fff3
+adress_commands:
+        .byte $00  
+        .byte $00  
+; fff5        
+list_commands:
+        .byte $00  
+        .byte $00  
+; $fff7
+number_of_commands:
+        .byt 1
+; fffa
+
+
 	
 ; ----------------------------------------------------------------------------
 ; Copyrights address
