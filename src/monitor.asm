@@ -6484,7 +6484,8 @@ call_routine_in_another_bank:
         STX BNKCIB
         JMP $040C
 
-
+commands_monitor:
+        .asciiz "monitor"
 
 Copyrights:
 monitor_signature:
@@ -6502,8 +6503,7 @@ adress_commands:
         .byte $00  
 ; fff5        
 list_commands:
-        .byte $00  
-        .byte $00  
+        .addr commands_monitor
 ; $fff7
 number_of_commands:
         .byt 1
