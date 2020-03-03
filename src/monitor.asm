@@ -6489,7 +6489,7 @@ commands_monitor:
 
 Copyrights:
 monitor_signature:
-       .byte   "Monitor V0.1 - ",__DATE__,0
+       .byte   "Monitor 2020.1 - ",__DATE__,0
 
        .res $FFF1-*
        .org $FFF1
@@ -6499,8 +6499,7 @@ parse_vector:
         .byte $00
 ; fff3
 adress_commands:
-        .byte $00  
-        .byte $00  
+        .addr monitor_start  
 ; fff5        
 list_commands:
         .addr commands_monitor
