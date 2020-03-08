@@ -6489,7 +6489,9 @@ commands_monitor:
 
 Copyrights:
 monitor_signature:
-       .byte   "Monitor 2020.1 - ",__DATE__,0
+       .asciiz  "Monitor V2020.1 - ",0
+date_compil:       
+       .byte __DATE__,0
 
        .res $FFF1-*
        .org $FFF1
