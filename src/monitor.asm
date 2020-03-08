@@ -6489,7 +6489,7 @@ commands_monitor:
 
 Copyrights:
 monitor_signature:
-       .asciiz  "Monitor V2020.1 - "
+       .asciiz  "Monitor V2020.1"
 date_compil:       
        .byte __DATE__,0
 
