@@ -6486,7 +6486,8 @@ call_routine_in_another_bank:
 
 commands_monitor:
         .asciiz "monitor"
-
+address_command_ptr:
+        .addr monitor_start
 Copyrights:
 monitor_signature:
        .asciiz  "Monitor V2020.1"
@@ -6501,7 +6502,7 @@ parse_vector:
         .byte $00
 ; fff3
 adress_commands:
-        .addr monitor_start  
+        .addr address_command_ptr
 ; fff5        
 list_commands:
         .addr commands_monitor
