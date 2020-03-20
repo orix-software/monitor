@@ -6490,7 +6490,7 @@ address_command_ptr:
         .addr monitor_start
 Copyrights:
 monitor_signature:
-       .asciiz  "Monitor V2020.1"
+       .asciiz  "Monitor v2020.1"
 date_compil:       
        .byte __DATE__,0
 
