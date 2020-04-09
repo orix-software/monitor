@@ -6488,7 +6488,6 @@ commands_monitor:
         .asciiz "monitor"
 address_command_ptr:
         .addr monitor_start
-Copyrights:
 monitor_signature:
        .asciiz  "Monitor v2020.1"
 date_compil:       
