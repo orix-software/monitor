@@ -14,6 +14,14 @@ ORIX_VERSION=1.0
 
 SOURCE=src/$(ROM).asm
 
+ifdef $(TRAVIS_BRANCH)
+ifneq ($(TRAVIS_BRANCH), master)
+RELEASE=alpha
+else
+RELEASE:=$(shell cat VERSION)
+endif
+endif
+
 TELESTRAT_TARGET_RELEASE=release/telestrat
 MYDATE = $(shell date +"%Y-%m-%d %H:%m")
  
@@ -23,6 +31,17 @@ build: $(SOURCE)
 	$(LD) -tnone $(ROM).ld65 -o $(ROM).rom
 
 test:
-	echo hello
+	#cp src/include/orix.h build/usr/include/orix/
+	mkdir -p build/usr/src/monitor/
+	mkdir -p build/usr/share/man/
+	mkdir -p build/usr/share/monitor/
+	cp $(ROM)sd.rom build/usr/share/shell/
+	sh tools/builddocs.sh
+	export ORIX_PATH=`pwd`
+	cd build && tar -c * > ../$(ROM).tar &&	cd ..
+	filepack  $(ORIX_ROM).tar $(ROM).pkg
+	gzip $(ROM).tar
+	mv $(ROM).tar.gz $(ROM).tgz
+	php buildTestAndRelease/publish/publish2repo.php $(ORIX_ROM).tgz ${hash} 6502 tgz $(RELEASE)
   
 
