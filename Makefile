@@ -35,7 +35,6 @@ test:
 	mkdir -p build/usr/share/man/
 	mkdir -p build/usr/share/$(ROM)/
 	cp $(ROM).rom build/usr/share/$(ROM)/
-	sh tools/builddocs.sh
 	export ORIX_PATH=`pwd`
 	cd build && tar -c * > ../$(ROM).tar &&	cd ..
 	filepack  $(ROM).tar $(ROM).pkg
