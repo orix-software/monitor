@@ -32,16 +32,17 @@ build: $(SOURCE)
 
 test:
 	#cp src/include/orix.h build/usr/include/orix/
-	mkdir -p build/usr/src/monitor/
 	mkdir -p build/usr/share/man/
-	mkdir -p build/usr/share/monitor/
-	cp $(ROM)sd.rom build/usr/share/shell/
+	mkdir -p build/usr/share/$(ROM)/
+	cp $(ROM).rom build/usr/share/$(ROM)/
 	sh tools/builddocs.sh
 	export ORIX_PATH=`pwd`
 	cd build && tar -c * > ../$(ROM).tar &&	cd ..
-	filepack  $(ORIX_ROM).tar $(ROM).pkg
+	filepack  $(ROM).tar $(ROM).pkg
 	gzip $(ROM).tar
 	mv $(ROM).tar.gz $(ROM).tgz
-	php buildTestAndRelease/publish/publish2repo.php $(ORIX_ROM).tgz ${hash} 6502 tgz $(RELEASE)
+	php buildTestAndRelease/publish/publish2repo.php $(ROM).tgz ${hash} 6502 tgz $(RELEASE)
+
+  
   
 
