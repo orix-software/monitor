@@ -8,7 +8,7 @@ ROM=monitor
 all : build
 .PHONY : all
 
-ifdef $(TRAVIS_BRANCH)
+ifdef TRAVIS_BRANCH
 ifeq ($(TRAVIS_BRANCH), master)
 RELEASE:=$(shell cat VERSION)
 else
