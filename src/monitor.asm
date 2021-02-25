@@ -6489,7 +6489,7 @@ commands_monitor:
 address_command_ptr:
         .addr monitor_start
 monitor_signature:
-       .asciiz  "Monitor v2021.2"
+       .asciiz  "Monitor v2021.1"
 date_compil:       
        .byte __DATE__,0
 
