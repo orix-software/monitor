@@ -6489,12 +6489,14 @@ commands_monitor:
 address_command_ptr:
         .addr monitor_start
 monitor_signature:
-       .asciiz  "Monitor v2020.1"
+       .asciiz  "Monitor v2021.1"
 date_compil:       
        .byte __DATE__,0
 
-       .res $FFF1-*
-       .org $FFF1
+       .res $FFF0-*
+       .org $FFF0
+type_of_rom:
+        .byt $01
 ; $fff1
 parse_vector:
         .byte $00
